@@ -1,18 +1,21 @@
 <script>
 export default {
   name: 'LearnItem',
-  data() {
-    return {
-      btnRelClassObject: {
-        btn: true,
-        'btn_add-related': !!this.item.related,
-        'btn_creat-related': !this.item.related,
-      },
-    };
-  },
   props: {
     item: Object,
     removeLearn: Function,
+    openNotes: Function,
+    openInfo: Function,
+  },
+  data() {
+    return {
+      styleObjectNotes: {
+        hasNotes: this.item.notes,
+      },
+      styleObjectInfo: {
+        hasInfo: this.item.info,
+      },
+    };
   },
 };
 </script>
@@ -23,51 +26,70 @@ export default {
       {{item.title}}
     </span>
 
-    <button
-      v-if="item.related"
-      class="btn btn_related-open"
-    >
-      related
-    </button>
+    <div class="LearnItem_buttons">
+      <button
+        class="btn btn_add-related"
+        :class="styleObjectInfo"
+        @click="openInfo(item.id)"
+      >
+        <i class="fas fa-plus"></i>
+        Add Info
+      </button>
 
-    <button
-      :class="btnRelClassObject"
-    >
-      +
-      {{item.related? '': 'add related'}}
-    </button>
+      <button
+        class="btn"
+        @click="openNotes(item.id)"
+        :class="styleObjectNotes"
+      >
+        <i class="fas fa-book-open"></i>
+        Notes
+      </button>
 
-    <button
-      type="button"
-      class="btn"
-      @click="removeLearn(item.id)"
-    >
-      REMOVE
-    </button>
+      <button
+        type="button"
+        class="btn btn-remove"
+        @click="removeLearn(item.id)"
+      >
+        <i class="fas fa-trash"></i>
+        Remove
+      </button>
+    </div>
   </li>
 </template>
 
 <style scoped>
   .LearnItem {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+
+    margin-bottom: 10px;
+    padding: 15px 20px;
+
+    font-size: 19px;
+    font-weight: 600;
+    background-color: #fff;
+    border-radius: 4px;
   }
 
-  .btn_related-open {
+  .LearnItem_buttons {
+    display: flex;
+  }
+
+  .LearnItem_buttons .btn {
     border: none;
-    color: red;
+    background-color: transparent;
+    font-size: 17px;
+    color: #bedac6;
   }
 
-  .btn_add-related {
-    padding: 5px 10px;
-    font-size: 20px;
-    line-height: 20px;
-    color: #666;
-    border-radius: 50%;
+  .LearnItem_buttons i {
+    margin-right: 5px;
   }
 
-  .btn_creat-related {
-    border-radius: 2px;
-    background-color: #f4f4f4;
+  .LearnItem_buttons .hasNotes,
+  .LearnItem_buttons .hasInfo,
+  .LearnItem_buttons .btn-remove {
+    color: #83b992;
   }
 </style>

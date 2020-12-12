@@ -9,6 +9,8 @@ export default {
   props: {
     learnList: Array,
     removeLearn: Function,
+    openNotes: Function,
+    openInfo: Function,
   },
 };
 </script>
@@ -25,6 +27,8 @@ export default {
       :key="item.id"
       :item="item"
       :removeLearn="removeLearn"
+      :openNotes="openNotes"
+      :openInfo="openInfo"
     />
   </ul>
 </template>
@@ -32,7 +36,5 @@ export default {
 <style scoped>
   .LearnList {
     list-style: none;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
   }
 </style>
