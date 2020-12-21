@@ -26,9 +26,9 @@ export default {
       v-for="item in learnList"
       :key="item.id"
       :item="item"
-      :removeLearn="removeLearn"
       :openNotes="openNotes"
       :openInfo="openInfo"
+      :removeLearn="removeLearn"
     />
   </ul>
 </template>

@@ -6,16 +6,13 @@ export default {
       inputValue: '',
     };
   },
-  props: {
-    addNewLearn: Function,
-  },
   methods: {
     add() {
       if (!this.inputValue) {
         return;
       }
 
-      this.addNewLearn(this.inputValue);
+      this.$emit('add-new-learn', this.inputValue);
       this.inputValue = '';
     },
   },

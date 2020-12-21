@@ -89,11 +89,11 @@ export default {
   <Header />
   <main class="main">
     <AddLearnItem
-      :addNewLearn="addNewLearn"
+      @add-new-learn="addNewLearn"
     />
     <LearnList
-      :learnList="learnList"
       :removeLearn="removeLearn"
+      :learnList="learnList"
       :openNotes="openNotes"
       :openInfo="openInfo"
     />
@@ -101,13 +101,13 @@ export default {
     <Notes
       v-if="isNotesOpen"
       :selectedItem="selectedItem"
-      :closeModal="closeModal"
+      @close-modal="closeModal"
     />
 
     <RelatedInfo
       v-if="isInfoOpen"
       :selectedItem="selectedItem"
-      :closeModal="closeModal"
+      @close-modal="closeModal"
     />
   </main>
 </template>

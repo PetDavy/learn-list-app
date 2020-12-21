@@ -3,25 +3,24 @@ export default {
   name: 'Notes',
   data() {
     return {
-      savesText: '',
+      savedText: '',
       text: 'Add your notes',
     };
   },
   props: {
     selectedItem: Object,
-    closeModal: Function,
   },
   mounted() {
     const notesText = this.selectedItem.notes;
 
     if (notesText) {
-      this.savesText = notesText;
+      this.savedText = notesText;
       this.text = notesText;
     }
   },
   methods: {
     undo() {
-      this.text = this.savesText;
+      this.text = this.savedText;
     },
     saveNotes() {
       const updatedItem = {
@@ -29,7 +28,10 @@ export default {
         notes: this.text,
       };
 
-      this.closeModal(updatedItem);
+      this.$emit('close-modal', updatedItem);
+    },
+    close() {
+      this.$emit('close-modal');
     },
   },
 };
@@ -64,7 +66,7 @@ export default {
 
     <button
       class="btn btn-close-modal"
-      @click="closeModal"
+      @click="close"
     >
       ×
     </button>

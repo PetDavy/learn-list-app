@@ -9,7 +9,6 @@ export default {
   },
   props: {
     selectedItem: Object,
-    closeModal: Function,
   },
   mounted() {
     const infoText = this.selectedItem.info;
@@ -29,7 +28,10 @@ export default {
         info: this.text,
       };
 
-      this.closeModal(updatedItem);
+      this.$emit('close-modal', updatedItem);
+    },
+    close() {
+      this.$emit('close-modal');
     },
   },
 };
@@ -64,7 +66,7 @@ export default {
 
     <button
       class="btn btn-close-modal"
-      @click="closeModal"
+      @click="close"
     >
       ×
     </button>
